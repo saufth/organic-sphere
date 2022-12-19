@@ -1,40 +1,78 @@
+.group {}
+
 .buttonContainer {
   @apply
     /* Sizing */
-    w-[164px]
-    h-[44px]
+    w-[188px]
+    h-12
+    /* Layout */
+    relative
+    [&>span]:absolute
+    [&>span]:inset-0
+    [&>span]:-z-10
     /* Flexbox & Grid */
     grid
     place-items-center
-    /* Border */
-    rounded
-    overflow-hidden
-    /* Typography */
-    font-supermolot-medium
-    text-emah-dark hover:text-emah-blue-dark
-    /* Background */
-    bg-gradient-to-br
-    from-emah-blue-light
-    via-emah-violet
-    to-emah-orange-light
-    /* Shadow */
-    shadow-center-2xl
-    shadow-emah-violet/10
-    /* Animation & Transitions */
-    transition-colors;
+    /* Boreder */
+    [&>span]:rounded;
 }
 
 .button {
   @apply
     /* Sizing */
-    w-[162px]
-    h-[42px]
-    bg-white
+    w-[186px]
+    h-[46px]
+    bg-white group-hover:bg-white/0
     /* Layout */
     relative
     z-10
+    /* Typography */
+    font-supermolot-demibold
+    text-emah-gray group-hover:text-white
     /* Border */
     rounded-sm
     /* Animations & Transitions */
     transition-colors;
+}
+
+.backgroundOrange {
+  @apply
+  /* Background */
+  bg-gradient-to-br
+  from-emah-orange-dark
+  via-emah-orange-light
+  to-emah-orange-light
+  /* Shadow */
+  shadow-center-3xl
+  shadow-emah-orange-light/50
+  /* Animations & Transitions */
+  animate-background-orange;
+}
+
+.backgroundBlue {
+  @apply
+  /* Background */
+  bg-gradient-to-br
+  from-emah-blue-light
+  via-emah-blue-light
+  to-emah-blue
+  /* Shadow */
+  shadow-center-3xl
+  shadow-emah-blue-light/50
+  /* Animations & Transitions */
+  animate-background-blue;
+}
+
+.backgroundPurple {
+  @apply
+  /* Background */
+  bg-gradient-to-br
+  from-emah-violet
+  via-emah-violet
+  to-[#5B00E8]
+  /* Shadow */
+  shadow-center-3xl
+  shadow-emah-violet/50
+  /* Animations & Transitions */
+  animate-background-pueple;
 }

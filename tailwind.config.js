@@ -88,15 +88,63 @@ module.exports = {
         600: '600ms'
       },
       animation: {
-        wave: 'wave 2s infinite alternate linear'
+        'background-orange': 'backgroundOrange 12s infinite ease',
+        'background-blue': 'backgroundBlue 12s infinite ease',
+        'background-pueple': 'backgroundPueple 12s infinite ease'
       },
       keyframes: {
-        wave: {
-          from: {
-            transform: 'scale(1)'
+        backgroundOrange: {
+          '0%': {
+            opacity: 1
           },
-          to: {
-            transform: 'scale(0.9)'
+          '23%': {
+            opacity: 1
+          },
+          '33%': {
+            opacity: 0
+          },
+          '90%': {
+            opacity: 0
+          },
+          '100%': {
+            opacity: 1
+          }
+        },
+        backgroundBlue: {
+          '0%': {
+            opacity: 0
+          },
+          '23%': {
+            opacity: 0
+          },
+          '33%': {
+            opacity: 1
+          },
+          '56%': {
+            opacity: 1
+          },
+          '66%': {
+            opacity: 0
+          },
+          '100%': {
+            opacity: 0
+          }
+        },
+        backgroundPueple: {
+          '0%': {
+            opacity: 0
+          },
+          '56%': {
+            opacity: 0
+          },
+          '66%': {
+            opacity: 1
+          },
+          '90%': {
+            opacity: 1
+          },
+          '100%': {
+            opacity: 0
           }
         }
       }
