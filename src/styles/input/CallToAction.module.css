@@ -1,0 +1,40 @@
+.buttonContainer {
+  @apply
+    /* Sizing */
+    w-[164px]
+    h-[44px]
+    /* Flexbox & Grid */
+    grid
+    place-items-center
+    /* Border */
+    rounded
+    overflow-hidden
+    /* Typography */
+    font-supermolot-medium
+    text-emah-dark hover:text-emah-blue-dark
+    /* Background */
+    bg-gradient-to-br
+    from-emah-blue-light
+    via-emah-violet
+    to-emah-orange-light
+    /* Shadow */
+    shadow-center-2xl
+    shadow-emah-violet/20
+    /* Animation & Transitions */
+    transition-colors;
+}
+
+.button {
+  @apply
+    /* Sizing */
+    w-[162px]
+    h-[42px]
+    bg-white
+    /* Layout */
+    relative
+    z-10
+    /* Border */
+    rounded-sm
+    /* Animations & Transitions */
+    transition-colors;
+}

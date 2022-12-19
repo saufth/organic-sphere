@@ -1,0 +1,58 @@
+.navbar {
+  @apply
+    /* Sizing */
+    w-full
+    /* Layout */
+    fixed
+    top-0
+    z-40
+    /* Spacing */
+    py-5 sm:py-6 lg:py-7;
+}
+
+.navbarBackground {
+  @apply
+    /* Border */
+    border-b
+    border-zinc-200
+    /* Background */
+    bg-white/60
+    /* Filters */
+    backdrop-filter
+    backdrop-blur-sm
+    backdrop-saturate-100;
+}
+
+.nav {
+  @apply
+    /* Sizing */
+    w-full;
+}
+
+.logo {
+  @apply
+    /* Flexbox & Grid */
+    flex
+    justify-start
+    items-center
+    gap-x-6
+    /* Layout */
+    -z-10;
+}
+
+.logoname {
+  @apply
+    /* Layout */
+    -z-10;
+}
+
+.list {
+  @apply
+    /* Flexbox & Grid */
+    flex
+    justify-between
+    items-center
+    /* Spacing */
+    pr-2 md:pr-0
+    gap-x-8 lg:gap-x-10;
+}
