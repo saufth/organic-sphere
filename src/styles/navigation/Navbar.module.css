@@ -10,11 +10,13 @@
     py-5 sm:py-6 lg:py-7;
 }
 
-.navbarBackground {
+.navbarSmall {
   @apply
     /* Border */
     border-b
     border-zinc-200
+    /* Spacing */
+    py-2 sm:py-2.5 lg:py-3
     /* Background */
     bg-white/60
     /* Filters */
@@ -40,10 +42,28 @@
     -z-10;
 }
 
+.logoSmall {
+  @apply
+    /* Flexbox & Grid */
+      gap-x-5;
+}
+
+.logomarkSmall {
+  @apply
+    /* Sizing */
+    w-14;
+}
+
 .logoname {
   @apply
     /* Layout */
     -z-10;
+}
+
+.logonameSmall {
+  @apply
+    /* Sizing */
+    w-16;
 }
 
 .list {

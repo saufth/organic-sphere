@@ -14,14 +14,22 @@ import styles from '../../styles/navigation/Navbar.module.css'
  */
 export default function Navbar () {
   const navbarRef = useRef<HTMLElement>(null)
+  const logoRef = useRef<HTMLImageElement>(null)
   const logomarkRef = useRef<HTMLImageElement>(null)
+  const logonameRef = useRef<HTMLImageElement>(null)
 
   const handleScrolling = (event: Event) => {
     const windowNode = (event.currentTarget as Window).scrollY
     if (windowNode > 1) {
-      navbarRef.current?.classList.add(styles.navbarBackground)
+      navbarRef.current?.classList.add(styles.navbarSmall)
+      logoRef.current?.classList.add(styles.logoSmall)
+      logomarkRef.current?.classList.add(styles.logomarkSmall)
+      logonameRef.current?.classList.add(styles.logonameSmall)
     } else {
-      navbarRef.current?.classList.remove(styles.navbarBackground)
+      navbarRef.current?.classList.remove(styles.navbarSmall)
+      logoRef.current?.classList.remove(styles.logoSmall)
+      logomarkRef.current?.classList.remove(styles.logomarkSmall)
+      logonameRef.current?.classList.remove(styles.logonameSmall)
     }
   }
 
@@ -44,7 +52,7 @@ export default function Navbar () {
 
             <div>
               <Link href='/'>
-                <div className={styles.logo}>
+                <div className={styles.logo} ref={logoRef}>
                   <Image
                     alt='emah logomark'
                     src='/images/logotype/logomark.svg'
@@ -60,6 +68,7 @@ export default function Navbar () {
                     height={24}
                     className={styles.logoname}
                     priority
+                    ref={logonameRef}
                   />
                 </div>
               </Link>
