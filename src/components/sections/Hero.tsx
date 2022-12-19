@@ -2,8 +2,6 @@
 import CallToAction from '../input/CallToAction'
 import Container from '../layout/Container'
 import Image from 'next/image'
-// Media
-import imageHero from '../../../public/images/sections/hero.png'
 // Styles
 import styles from '../../styles/sections/Hero.module.css'
 
@@ -36,7 +34,7 @@ export default function Hero () {
         <div className={styles.imageContainer}>
           <Image
             alt='emah'
-            src={imageHero}
+            src='/images/sections/hero/hero.png'
             width={640}
             height={640}
             className={styles.image}
