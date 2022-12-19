@@ -40,27 +40,29 @@
     z-10
     /* Flexbox & Grid */
     flex
-    gap-x-8;
+    flex-col
+    items-center
+    gap-y-40;
 }
 
 .card {
   @apply
     /* Sizing */
-    w-xl
+    w-5xl
     /* Layout */
     z-10 hover:z-20
     overflow-hidden
     /* Background */
-    bg-white/50
+    bg-white/80
     /* Border */
     rounded-lg
     /* Shadow */
-    shadow-2xl
+    shadow-center-2xl
     shadow-emah-orange-dark/10
     /* Filters */
     backdrop-filter
     backdrop-blur-sm
-    backdrop-saturate-[3]
+    backdrop-saturate-[10]
     /* Transitions & Animations */
     ease-linear
     duration-300
@@ -70,7 +72,7 @@
 .cardContainer {
   @apply
     /* Spacing */
-    p-8
+    p-16
     space-y-8;
 }
 
@@ -82,8 +84,9 @@
 
 .cardDescription {
   @apply
+    /* Sizing */
+    w-lg
     /* Typography */
-    font-supermolot-medium
     text-lg
     text-emah-gray
     [&>span]:font-supermolot-demibold
@@ -93,8 +96,7 @@
 .cardFooter {
   @apply
     /* Flexbox & Grid */
-    flex
-    justify-center;
+    flex;
 }
 
 .cardLink {
