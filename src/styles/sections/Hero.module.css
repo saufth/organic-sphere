@@ -30,7 +30,7 @@
   /* Typography */
   font-cairo-medium
   text-2xl
-  text-emah-gray;
+  text-emah-gray/50;
 }
 
 .headingHighlight {

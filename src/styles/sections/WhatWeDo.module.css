@@ -8,24 +8,34 @@
 
 .header {
   @apply
-    /* Spacing */
-    space-y-8
+    /* Flexbox & Grid */
+    flex
+    flex-col
+    items-center
+    gap-y-16
     /* Typography */
     text-center;
 }
 
-.description {
+.heading {
   @apply
     /* Typography */
-    font-supermolot-medium
     text-2xl
-    text-emah-gray;
+    text-emah-gray/50;
+}
+
+.description {
+  @apply
+    /* Sizing */
+    w-5xl
+    /* Typography */
+    leading-snug;
 }
 
 .content {
   @apply
     /* Spacing */
-    py-40
+    py-64
     /* Layout */
     z-10
     /* Flexbox & Grid */

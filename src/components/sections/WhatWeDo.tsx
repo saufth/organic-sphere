@@ -12,17 +12,15 @@ import CallToAction from '../input/CallToAction'
 export default function WhatWeDo () {
   return (
     <section id='about' className={styles.section}>
-      <Container auto>
+      <Container auto space>
         <div className={styles.header}>
-          <h2>
-            ¿Qué hacemos?
+          <h2 className={styles.heading}>
+            Lo Que Hacemos
           </h2>
-          <p className={styles.description}>
-            Desarrollamos branding y marketing en sincronía. Creemos que los<br />
-            mejores resultados son logrados cuando la ejecución del branding y<br />
-            el marketing empujan a la misma dirección.<br />
-            Cuando trabajan en sincronía.
-          </p>
+          <h2 className={styles.description}>
+            Creemos que los mejores resultados son logrados cuando
+            la ejecución del branding y el marketing empujan a la misma dirección.
+          </h2>
         </div>
         <div className={styles.content}>
           <div className={styles.card}>
