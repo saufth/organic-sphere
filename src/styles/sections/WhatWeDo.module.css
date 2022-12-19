@@ -41,12 +41,12 @@
     z-10 hover:z-20
     overflow-hidden
     /* Background */
-    bg-white/40
+    bg-white/50
     /* Border */
     rounded-lg
     /* Shadow */
-    shadow-xl
-    shadow-emah-orange-light/20
+    shadow-2xl
+    shadow-emah-orange-dark/10
     /* Filters */
     backdrop-filter
     backdrop-blur-sm
