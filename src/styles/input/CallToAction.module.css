@@ -46,7 +46,7 @@
   shadow-center-3xl
   shadow-emah-orange-light/50
   /* Animations & Transitions */
-  animate-background-orange;
+  animate-tansition-1-3;
 }
 
 .backgroundBlue {
@@ -60,7 +60,7 @@
   shadow-center-3xl
   shadow-emah-blue-light/50
   /* Animations & Transitions */
-  animate-background-blue;
+  animate-tansition-2-3;
 }
 
 .backgroundPurple {
@@ -74,5 +74,5 @@
   shadow-center-3xl
   shadow-emah-violet/50
   /* Animations & Transitions */
-  animate-background-pueple;
+  animate-tansition-3-3;
 }

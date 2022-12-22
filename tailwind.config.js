@@ -88,12 +88,12 @@ module.exports = {
         600: '600ms'
       },
       animation: {
-        'background-orange': 'backgroundOrange 12s infinite ease',
-        'background-blue': 'backgroundBlue 12s infinite ease',
-        'background-pueple': 'backgroundPueple 12s infinite ease'
+        'tansition-1-3': 'tansition-1-3 9s infinite ease',
+        'tansition-2-3': 'tansition-2-3 9s infinite ease',
+        'tansition-3-3': 'tansition-3-3 9s infinite ease'
       },
       keyframes: {
-        backgroundOrange: {
+        'tansition-1-3': {
           '0%': {
             opacity: 1
           },
@@ -110,7 +110,7 @@ module.exports = {
             opacity: 1
           }
         },
-        backgroundBlue: {
+        'tansition-2-3': {
           '0%': {
             opacity: 0
           },
@@ -130,7 +130,7 @@ module.exports = {
             opacity: 0
           }
         },
-        backgroundPueple: {
+        'tansition-3-3': {
           '0%': {
             opacity: 0
           },

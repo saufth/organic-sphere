@@ -1,10 +1,16 @@
 // Components
 import GSearchSchemaScript from '../components/app/GSearchSchemaScript'
 import Head from 'next/head'
-import Navbar from '../components/navigation/Navbar'
-import Hero from '../components/sections/Hero'
-import Services from '../components/sections/Services'
-import WhatWeDo from '../components/sections/WhatWeDo'
+// import Navbar from '../components/navigation/Navbar'
+// import Hero from '../components/sections/Hero'
+// import Services from '../components/sections/Services'
+// import WhatWeDo from '../components/sections/WhatWeDo'
+import { FC } from 'react'
+import dynamic from 'next/dynamic'
+
+const Sphere = dynamic(() => import('../components/animation/Sphere'), {
+  ssr: false
+})
 
 /**
  * the base URL of the application
@@ -47,7 +53,7 @@ const socialImageUrl = `${baseUrl}images/emah.jpg`
  * The main page of the application
  * @returns HomePage component
  */
-export default function HomePage () {
+const HomePage: FC = () => {
   return (
     <>
       <Head>
@@ -77,13 +83,16 @@ export default function HomePage () {
         <meta name='twitter:site' content='@rehsok' />
         <meta name='twitter:image' content={socialImageUrl} />
       </Head>
-      <main>
+      <Sphere />
+      {/* <main>
         <Navbar />
         <Hero />
         <WhatWeDo />
         <Services />
-      </main>
+      </main> */}
       <GSearchSchemaScript />
     </>
   )
 }
+
+export default HomePage
