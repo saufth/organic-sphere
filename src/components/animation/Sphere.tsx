@@ -39,6 +39,7 @@ const Sphere = () => {
   return (
     <div className='h-screen'>
       <Canvas>
+        <color attach='background' args={['#010101']} />
         <WaveShader />
       </Canvas>
     </div>
