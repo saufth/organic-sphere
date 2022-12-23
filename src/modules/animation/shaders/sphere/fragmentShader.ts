@@ -3,9 +3,9 @@ const fragmentShader = `
   varying float vPerlinStrength;
 
   void main() {
-    float pStrength = vPerlinStrength * 0.1;
-    pStrength *= 2.0;
-    gl_FragColor = vec4(vNormal, 1.0);
+    float pStrength = vPerlinStrength + 0.08;
+    pStrength *= 4.0;
+    gl_FragColor = vec4(pStrength*1.6, pStrength, pStrength, 0.6);
   }
 `
 

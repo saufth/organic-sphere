@@ -1,9 +1,4 @@
 export const vertexShader = `
-  uniform float uTime;
-
-  varying vec3 vNormal;
-  varying float vPerlinStrength;
-
   vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
   vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
   vec4 fade4d(vec4 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
@@ -209,20 +204,24 @@ export const vertexShader = `
     float n_xyzw = mix(n_yzw.x, n_yzw.y, fade_xyzw.x);
     return 2.2 * n_xyzw;
   }
+  
+  uniform float uTime;
+  uniform float uDistortionFrecuency;
+  uniform float uDistortionStrength;
+  uniform float uDisplacementFrecuency;
+  uniform float uDisplacementStrength;
+  uniform float uTimeFrecuency;
+
+  varying vec3 vNormal;
+  varying float vPerlinStrength;
 
   void main() {
-    vec3 newPosition = position;
-
-    float uDistortionFrecuency = 2.0;
-    float uDisplacementFrecuency = 64.0;
-    float uDisplacementStrength = 0.1;
-
-    vec3 displacementPosition = position * uDisplacementFrecuency;
-    displacementPosition.x += perlin3d(vec3(position.yz * uDistortionFrecuency, uTime * 0.7));
-    displacementPosition.y += perlin3d(vec3(position.xz * uDistortionFrecuency, uTime * 0.7));
-    displacementPosition.z += perlin3d(vec3(position.xy * uDistortionFrecuency, uTime * 0.7));
+    vec3 displacementPosition = position;
+    displacementPosition += perlin4d(vec4(displacementPosition * uDistortionFrecuency, uTime * uTimeFrecuency)) * uDistortionStrength;
     
-    float perlinStrength = perlin4d(vec4(displacementPosition, uTime * 0.5)) * uDisplacementStrength;
+    float perlinStrength = perlin4d(vec4(displacementPosition * uDisplacementFrecuency, uTime * uTimeFrecuency)) * uDisplacementStrength;
+    
+    vec3 newPosition = position;
     newPosition += normal * perlinStrength;
 
     vec4 viewPosition = viewMatrix * vec4(newPosition, 1.0);
