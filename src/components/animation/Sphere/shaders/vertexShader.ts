@@ -216,6 +216,8 @@ export const vertexShader = `
   uniform vec3 uLightBColor;
   uniform vec3 uLightBPosition;
   uniform float uLightBIntensity;
+  
+  uniform vec2 uSubdivision;
 
   // Distortion
   uniform float uDistortionFrecuency;
@@ -224,6 +226,11 @@ export const vertexShader = `
   // Displacement
   uniform float uDisplacementFrecuency;
   uniform float uDisplacementStrength;
+
+  // Fresnel
+  uniform float uFresnelOffset;
+  uniform float uFresnelMultiplier;
+  uniform float uFresnelPower;
   
   // Time
   uniform float uTime;
@@ -251,8 +258,8 @@ export const vertexShader = `
     gl_Position = projectionMatrix * viewPosition;
 
     // Bi tangents
-    float distanceA = (M_PI * 2.0) / 512.0;
-    float distanceB = M_PI / 512.0;
+    float distanceA = (M_PI * 2.0) / uSubdivision.x;
+    float distanceB = M_PI / uSubdivision.x;
 
     vec3 biTangent = cross(normal, tangent.xyz);
 
@@ -265,14 +272,19 @@ export const vertexShader = `
     vec3 computedNormal = cross(displcedPositionA - displacedPosition.xyz, displcedPositionB - displacedPosition.xyz);
     computedNormal = normalize(computedNormal);
 
+    // Fresnel
+    vec3 viewDirection = normalize(displacedPosition.xyz - cameraPosition);
+    float fresnel = uFresnelOffset + (1.0 + dot(viewDirection, computedNormal)) * uFresnelMultiplier;
+    fresnel = pow(fresnel, uFresnelPower);
 
     // Color
     float lightAIntensity = max(0.0, -dot(computedNormal.xyz, normalize(-uLightAPosition))) * uLightAIntensity;
     float lightBIntensity = max(0.0, -dot(computedNormal.xyz, normalize(-uLightBPosition))) * uLightBIntensity;
 
     vec3 color = vec3(0.0);
-    color = mix(color, uLightAColor, lightAIntensity);
-    color = mix(color, uLightBColor, lightBIntensity);
+    color = mix(color, uLightAColor, fresnel);
+    // color = mix(color, uLightAColor, lightAIntensity);
+    // color = mix(color, uLightBColor, lightBIntensity);
 
     // Varying
     vNormal = normal;

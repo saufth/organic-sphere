@@ -1,7 +1,7 @@
 // Graphics
 import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { OrbitControls, shaderMaterial } from '@react-three/drei'
-import { ShaderMaterial, Mesh, Vector3, Color, Spherical } from 'three'
+import { ShaderMaterial, Mesh, Vector3, Color, Spherical, Vector2 } from 'three'
 // Shaders
 import { vertexShader, fragmentShader } from './shaders'
 // Controls
@@ -42,11 +42,31 @@ const controlsDefaults = {
     max: 1,
     step: 0.001
   },
+  fresnelOffset: {
+    min: -1,
+    max: 1,
+    step: 0.001
+  },
+  frenelMultiplier: {
+    min: 0,
+    max: 5,
+    step: 0.001
+  },
+  frenelPower: {
+    min: 0,
+    max: 5,
+    step: 0.001
+  },
   time: {
     min: 0,
     max: 0.001,
     step: 0.000001
   }
+}
+
+const sphere = {
+  width: 512,
+  height: 512
 }
 
 const lights = {
@@ -70,12 +90,18 @@ const uniforms = {
   uLightBColor: new Color(lights.b.color),
   uLightBPosition: new Vector3(-1.0, -1.0, 0.0),
   uLightBIntensity: lights.b.intensity,
+  // Subdivision
+  uSubdivision: new Vector2(sphere.width, sphere.height),
   // Distortion
   uDistortionFrecuency: 2,
   uDistortionStrength: 1,
   // Displacement
   uDisplacementFrecuency: 2,
   uDisplacementStrength: 0.2,
+  // Fresnel
+  uFresnelOffset: 0,
+  uFresnelMultiplier: 1,
+  uFresnelPower: 1,
   // Time
   uTime: 0.11
 }
@@ -105,6 +131,9 @@ const WaveShader = () => {
     strengthDistortion,
     frecuencyDisplacement,
     strengthDisplacement,
+    offsetFresnel,
+    multiplierFresnel,
+    powerFresnel,
     frecuencyTime
   } = useControls('Sphere', {
     Light: folder({
@@ -157,6 +186,20 @@ const WaveShader = () => {
       strengthDisplacement: {
         value: uniforms.uDisplacementStrength,
         ...controlsDefaults.displacementStrength
+      }
+    }),
+    Fresnel: folder({
+      offsetFresnel: {
+        value: uniforms.uFresnelOffset,
+        ...controlsDefaults.fresnelOffset
+      },
+      multiplierFresnel: {
+        value: uniforms.uFresnelMultiplier,
+        ...controlsDefaults.frenelMultiplier
+      },
+      powerFresnel: {
+        value: uniforms.uFresnelPower,
+        ...controlsDefaults.frenelPower
       }
     }),
     Time: folder({
@@ -212,8 +255,8 @@ const WaveShader = () => {
   return (
     <mesh ref={sphereRef}>
       <OrbitControls />
-      <ambientLight intensity={0.8} />
-      <spotLight position={[10, 15, 10]} angle={0.3} />
+      {/* <ambientLight intensity={0.8} />
+      <spotLight position={[10, 15, 10]} angle={0.3} /> */}
       {/* @ts-ignore */}
       <waveShaderMaterial
         uLightAIntensity={intensityALight}
@@ -222,9 +265,15 @@ const WaveShader = () => {
         uDistortionStrength={strengthDistortion}
         uDisplacementFrecuency={frecuencyDisplacement}
         uDisplacementStrength={strengthDisplacement}
+        uFresnelOffset={offsetFresnel}
+        uFresnelMultiplier={multiplierFresnel}
+        uFresnelPower={powerFresnel}
         ref={shaderRef}
       />
-      <sphereGeometry attach='geometry' args={[1, 512, 512]} />
+      <sphereGeometry
+        attach='geometry'
+        args={[1, sphere.width, sphere.height]}
+      />
     </mesh>
   )
 }
@@ -233,7 +282,7 @@ const Sphere = () => {
   return (
     <div className='h-screen'>
       <Canvas>
-        <color attach='background' args={['#2B2B2B']} />
+        <color attach='background' args={['#000000']} />
         <WaveShader />
       </Canvas>
     </div>
