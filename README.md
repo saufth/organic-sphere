@@ -1,6 +1,6 @@
 # emah
 
-The official emah website built in [Next.js](https://nextjs.org/) and [Typescript](https://www.typescriptlang.org/) with [TailwindCSS](https://tailwindcss.com/) for styling.
+The official emah website built in [Next.js](https://nextjs.org/) and [Typescript](https://www.typescriptlang.org/) with [TailwindCSS](https://tailwindcss.com/) for styling and [R3F](https://docs.pmnd.rs/react-three-fiber) for 3D graphics.
 
 ## Technologies
 
@@ -9,11 +9,12 @@ The official emah website built in [Next.js](https://nextjs.org/) and [Typescrip
 - [React.js](https://reactjs.org) v18.2.0
 - [Typescript](https://www.typescriptlang.org/) v4.9.4
 - [TailwindCSS](https://tailwindcss.com/) v3.2.4
+- [R3F](https://docs.pmnd.rs/react-three-fiber) v8.9.1
 - [StandardJS](https://standardjs.com/) v17.0.0
 
 ## Configuration
 
-Using NextJS ESLint with StandardJS, I use the following configuration for eslintrc file:
+Using NextJS ESLint with StandardJS, is necessary the following configuration for eslintrc file to ensure ESLint works propertly with React components:
 
 ```
 "extends": [
@@ -22,13 +23,11 @@ Using NextJS ESLint with StandardJS, I use the following configuration for eslin
 ]
 ```
 
-This makes ESLint works correctly with React components.
-
 ## Folder Structure
 
 I'm using the <ins>src</ins> folder for keep code at a different level than configurations and miscellaneous files.
 
-Thi is the structure I use for my Next.js projects:
+This is the structure I use for my Next.js projects:
 
 <img src="/public/images/structure/onion-shape.jpg" alt="Onion-shape structure" />
 
@@ -39,7 +38,6 @@ We can express the above image with the following structure:
   - app
   - core
   - components (domain)
-  - modules (domain)
   - pages
     - api
 ```
@@ -104,32 +102,13 @@ We can express the <ins>domain</ins> layer with the following structure:
 ```
 - src
   - components
-  - modules
 ```
 
 ##### Components
 
 The components that make up our app pages.
 
-The business-logic side keep a lot of things, such as queries, or functions that mutate data, are all imported from modules so that they can be reusable across components.
-
-We could develop our folder structure in this way:
-
-```
-- src
-  - components
-    - search
-      - Search.tsx
-      - SearchSuggestions.tsx
-    - navigation
-      - Navbar.tsx
-    - sections
-      - Hero.tsx
-```
-
-##### Modules
-
-What should add to this folder anything about the <ins>domain</ins> that isn't a component, like:
+The business-logic side keep a lot of things, such as queries, or functions that mutate data, are all at the same folder that components and they can be reusable across components.
 
 - Custom hooks
 - Configurations
@@ -140,16 +119,20 @@ We could develop our folder structure in this way:
 
 ```
 - src
-  - modules
-    - search
-      - hooks
-      - config
-      - utils
-      - ...
+  - components
+    - input
+      - CallToAction
+        - index.tsx
+        - hooks
+        - utils
+        - queries
     - navigation
-      - hooks
-      - config
-    - ...
+      - Navbar
+        - index.tsx
+        - hooks
+        - config
+    - sections
+      - Hero.tsx
 ```
 
 #### Pages
@@ -202,14 +185,6 @@ EsLint can help us by adding the following configuration, can automatically warn
         },
         {
           "target": "./src/core",
-          "from": "./src/modules"
-        },
-        {
-          "target": "./src/core",
-          "from": "./src/pages"
-        },
-        {
-          "target": "./src/modules",
           "from": "./src/pages"
         },
         {
@@ -218,10 +193,6 @@ EsLint can help us by adding the following configuration, can automatically warn
         },
         {
           "target": "./src/core",
-          "from": "./src/app"
-        },
-        {
-          "target": "./src/modules",
           "from": "./src/app"
         },
         {
@@ -234,7 +205,8 @@ EsLint can help us by adding the following configuration, can automatically warn
 }
 ```
 
-## Getting started
+
+- Queries## Getting started
 
 I recommend use [pnpm](https://pnpm.io/) because it hold all the packages at a global (centralized) store and use them if needed by other projects too by creating hard links to it.
 

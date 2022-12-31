@@ -1,11 +1,10 @@
 // Components
-import GSearchSchemaScript from '../components/app/GSearchSchemaScript'
+import GSearchSchemaScript from '../components/app/scripts/GSearchSchemaScript'
 import Head from 'next/head'
 // import Navbar from '../components/navigation/Navbar'
 // import Hero from '../components/sections/Hero'
 // import Services from '../components/sections/Services'
 // import WhatWeDo from '../components/sections/WhatWeDo'
-import { FC } from 'react'
 import dynamic from 'next/dynamic'
 
 const Sphere = dynamic(() => import('../components/animation/Sphere'), {
@@ -53,7 +52,7 @@ const socialImageUrl = `${baseUrl}images/emah.jpg`
  * The main page of the application
  * @returns HomePage component
  */
-const HomePage: FC = () => {
+const HomePage = () => {
   return (
     <>
       <Head>
