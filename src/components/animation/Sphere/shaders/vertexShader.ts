@@ -216,45 +216,39 @@ export const vertexShader = `
   uniform vec3 uLightBColor;
   uniform vec3 uLightBPosition;
   uniform float uLightBIntensity;
-  
+  // Subdivision
   uniform vec2 uSubdivision;
-
   // Distortion
   uniform float uDistortionFrecuency;
   uniform float uDistortionStrength;
-
   // Displacement
   uniform float uDisplacementFrecuency;
   uniform float uDisplacementStrength;
-
   // Fresnel
   uniform float uFresnelOffset;
   uniform float uFresnelMultiplier;
   uniform float uFresnelPower;
-  
   // Time
   uniform float uTime;
 
-  varying vec3 vNormal;
-  varying float vPerlinStrength;
   varying vec3 vColor;
 
-  vec4 getDisplacedPosition(vec3 _position) {
-    vec3 displacementPosition = _position;
-    displacementPosition += perlin4d(vec4(displacementPosition * uDistortionFrecuency, uTime)) * uDistortionStrength;
+  vec3 getDisplacedPosition(vec3 _position) {
+    vec3 distoredPosition = _position;
+    distoredPosition += perlin4d(vec4(distoredPosition * uDistortionFrecuency, uTime)) * uDistortionStrength;
     
-    float perlinStrength = perlin4d(vec4(displacementPosition * uDisplacementFrecuency, uTime));
+    float perlinStrength = perlin4d(vec4(distoredPosition * uDisplacementFrecuency, uTime));
     
     vec3 displacedPosition = _position;
     displacedPosition += normalize(_position) * perlinStrength * uDisplacementStrength;
 
-    return vec4(displacedPosition, perlinStrength);
+    return displacedPosition;
   }
 
   void main() {
     // Position
-    vec4 displacedPosition = getDisplacedPosition(position);
-    vec4 viewPosition = viewMatrix * vec4(displacedPosition.xyz, 1.0);
+    vec3 displacedPosition = getDisplacedPosition(position);
+    vec4 viewPosition = viewMatrix * vec4(displacedPosition, 1.0);
     gl_Position = projectionMatrix * viewPosition;
 
     // Bi tangents
@@ -282,13 +276,11 @@ export const vertexShader = `
     float lightBIntensity = max(0.0, -dot(computedNormal.xyz, normalize(-uLightBPosition))) * uLightBIntensity;
 
     vec3 color = vec3(0.0);
-    color = mix(color, uLightAColor, fresnel);
-    // color = mix(color, uLightAColor, lightAIntensity);
-    // color = mix(color, uLightBColor, lightBIntensity);
+    color = mix(color, uLightAColor, lightAIntensity * fresnel);
+    color = mix(color, uLightBColor, lightBIntensity * fresnel);
+    color = mix(color, vec3(1.0), clamp(pow(max(0.0, fresnel - 0.8), 3.0), 0.0, 1.0));
 
     // Varying
-    vNormal = normal;
-    vPerlinStrength = displacedPosition.a;
     vColor = color;
   }
 `
