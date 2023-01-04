@@ -1,6 +1,6 @@
-# emah
+# Organic Sphere
 
-The official emah website built in [Next.js](https://nextjs.org/) and [Typescript](https://www.typescriptlang.org/) with [TailwindCSS](https://tailwindcss.com/) for styling and [R3F](https://docs.pmnd.rs/react-three-fiber) for 3D graphics.
+Organic Sphere built in [Next.js](https://nextjs.org/) and [Typescript](https://www.typescriptlang.org/) with [TailwindCSS](https://tailwindcss.com/) for styling and [R3F](https://docs.pmnd.rs/react-three-fiber) for 3D graphics.
 
 ## Technologies
 
