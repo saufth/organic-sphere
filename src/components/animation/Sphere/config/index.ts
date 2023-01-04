@@ -11,7 +11,7 @@ export const size = {
 export const delta = 16
 
 // Color
-export const clearColor = new Color('#010101')
+export const clearColor = new Color('#010101').convertSRGBToLinear()
 
 // Lights
 export const lights = {

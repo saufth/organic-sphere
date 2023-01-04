@@ -1,14 +1,14 @@
 // Graphics
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { OrbitControls, shaderMaterial, Effects, PerspectiveCamera } from '@react-three/drei'
-import { ShaderMaterial, Mesh, Vector2 } from 'three'
+import { ShaderMaterial, Mesh } from 'three'
 import { UnrealBloomPass } from 'three-stdlib'
 // Shaders
 import { vertexShader, fragmentShader } from './shaders'
 // Controls
 import { useControls, folder } from 'leva'
 // Hooks
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useRef } from 'react'
 // Config
 import * as config from './config'
 
@@ -90,6 +90,7 @@ const WaveShader = () => {
 
   useFrame(() => {
     shaderRef.current.uniforms.uTime.value += config.delta * frecuencyTime
+    console.log(`#${config.clearColor.getHexString()}`)
   })
 
   return (
@@ -116,19 +117,10 @@ const WaveShader = () => {
 }
 
 const EffectsComposer = () => {
-  const { size, scene, camera } = useThree()
-
-  const aspect = useMemo(
-    () => new Vector2(size.width, size.height),
-    [size]
-  )
-
   return (
     <Effects>
-      <renderPass scene={scene} camera={camera} />
       {/* @ts-ignore */}
       <unrealBloomPass
-        resolution={aspect}
         strength={0.8}
         radius={0.315}
         clearColor={config.clearColor}
@@ -151,8 +143,8 @@ const Sphere = () => {
           enableDamping
         />
         <PerspectiveCamera fov={25} far={15} />
-        <EffectsComposer />
         <WaveShader />
+        <EffectsComposer />
       </Canvas>
     </div>
   )
