@@ -1,6 +1,11 @@
 // Graphics
-import { Canvas, extend, useFrame } from '@react-three/fiber'
-import { OrbitControls, shaderMaterial, Effects, PerspectiveCamera } from '@react-three/drei'
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
+import {
+  OrbitControls,
+  shaderMaterial,
+  Effects as EffectsComposer,
+  PerspectiveCamera
+} from '@react-three/drei'
 import { ShaderMaterial, Mesh } from 'three'
 import { UnrealBloomPass } from 'three-stdlib'
 // Shaders
@@ -51,7 +56,6 @@ const WaveShader = () => {
 
   useEffect(() => {
     sphereRef.current.geometry.computeTangents()
-    console.log(UnrealBloomPass)
   }, [])
 
   // Light A
@@ -90,7 +94,6 @@ const WaveShader = () => {
 
   useFrame(() => {
     shaderRef.current.uniforms.uTime.value += config.delta * frecuencyTime
-    console.log(`#${config.clearColor.getHexString()}`)
   })
 
   return (
@@ -116,16 +119,19 @@ const WaveShader = () => {
   )
 }
 
-const EffectsComposer = () => {
+const BloomEffect = () => {
+  const { scene, camera } = useThree()
+
   return (
-    <Effects>
+    <EffectsComposer>
+      <renderPass scene={scene} camera={camera} />
       {/* @ts-ignore */}
       <unrealBloomPass
         strength={0.8}
         radius={0.315}
         clearColor={config.clearColor}
       />
-    </Effects>
+    </EffectsComposer>
   )
 }
 
@@ -143,8 +149,8 @@ const Sphere = () => {
           enableDamping
         />
         <PerspectiveCamera fov={25} far={15} />
+        <BloomEffect />
         <WaveShader />
-        <EffectsComposer />
       </Canvas>
     </div>
   )
